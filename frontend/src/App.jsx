@@ -36,50 +36,6 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen]   = useState(true)
   const bottomRef = useRef(null)
 
-  const DEMO_MESSAGES = [
-    {
-      role: 'user',
-      content: 'Why is Colombo so expensive compared to other districts?',
-    },
-    {
-      role: 'assistant',
-      content: `Colombo is by far the most expensive district in Sri Lanka for property, averaging LKR 154,388,229 — which is 6.1x more expensive than the most affordable district (Badulla at LKR 25,306,288).\n\nKey reasons why Colombo commands such a premium:\n\n1. High land scarcity — Colombo is a dense urban district with very limited available land, driving land prices up to LKR 800,000 per perch vs LKR 130,000 in Badulla.\n2. CBD and business district proximity — properties near Fort, Kollupitiya, and Bambalapitiya attract premium buyers and investors.\n3. International schools and hospitals — areas near top schools command a strong location premium.\n4. Expat and corporate demand — multinational companies and expatriates drive rental and purchase demand.\n\nFull district price ranking:\nColombo (LKR 154,388,229) > Negombo (LKR 74,667,044) > Galle (LKR 62,672,159) > Kandy (LKR 56,458,331) > Jaffna (LKR 35,773,952) > Matara (LKR 32,385,069) > Ratnapura (LKR 27,996,739) > Kurunegala (LKR 27,317,814) > Anuradhapura (LKR 26,301,668) > Badulla (LKR 25,306,288)`,
-      model_used: 'meta-llama/llama-3.3-70b-instruct:free',
-      contexts: [
-        'District price analysis [raw_houses.csv]: Colombo is the most expensive district at an average of LKR 154,388,229 (1,428 properties), which is 2.0x the overall average of LKR 77,717,913. This is driven by high land scarcity, proximity to the CBD, business districts, and international schools. Badulla is the most affordable at LKR 25,306,288 (138 properties) — 6.1x cheaper than Colombo.',
-        'Key price drivers based on ML model [raw_houses.csv]: 1. district/location (combined) — 61.7% of model predictive power. 2. land size (perches) — 12.7%. 3. property type tier — 10.6%. Location alone explains 61.7% of price variation — confirming that location, location, location holds true in the Sri Lankan market.',
-      ],
-    },
-    {
-      role: 'user',
-      content: 'How does land size affect house price?',
-    },
-    {
-      role: 'assistant',
-      content: `Land size (measured in perches) has a significant and progressive impact on house prices in Sri Lanka:\n\n• < 8 perches: LKR 63,924,101 average\n• 8–15 perches: LKR 70,837,183 average (↑11% vs previous tier)\n• 15–30 perches: LKR 78,526,736 average (↑11% vs previous tier)\n• 30+ perches: LKR 109,421,168 average (↑39% vs previous tier)\n\nLand size is the 2nd most important price driver after district, explaining 12.7% of price variation according to the ML model.\n\nWhy land matters so much in Sri Lanka: land is bought and sold separately from construction, and in high-demand districts like Colombo, each additional perch can add LKR 800,000+ to total value. Larger plots also allow future development or extensions, which buyers pay a premium for.`,
-      model_used: 'meta-llama/llama-3.3-70b-instruct:free',
-      contexts: [
-        'How land size affects price [raw_houses.csv]: < 8 perches: LKR 63,924,101 average. 8–15 perches: LKR 70,837,183 average (↑11%). 15–30 perches: LKR 78,526,736 average (↑11%). 30+ perches: LKR 109,421,168 average (↑39%). Land size is one of the most direct price drivers in Sri Lanka.',
-        'Dataset Overview [raw_houses.csv]: 5,000 properties. Price range: LKR 6,703,300 to LKR 420,205,591. Average estimated price: LKR 77,717,913. Average bedrooms: 3.',
-      ],
-    },
-  ]
-
-  function loadDemo() {
-    setMessages(DEMO_MESSAGES)
-    setStats({
-      total_properties:    5000,
-      avg_estimated_price: 77717913,
-      min_estimated_price: 6703300,
-      max_estimated_price: 420205591,
-      avg_bedrooms:        3,
-    })
-    setTrainMetrics({ r2: 0.9535, accuracy: 88.6 })
-    setSources(['raw_houses.csv'])
-    setIndexed(true)
-    setModelTrained(true)
-  }
-
   useEffect(() => { fetchStatus() }, [])
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -345,7 +301,6 @@ export default function App() {
                 <ExampleQ text="What is the price difference between a villa and an apartment?" onClick={setQuestion} />
                 <ExampleQ text="How much does having a pool add to the price?" onClick={setQuestion} />
               </div>
-              <button className="demo-btn" onClick={loadDemo}>▶ Load Demo Conversation</button>
             </div>
           )}
 
