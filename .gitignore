@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Model files (large binaries)
+model/model.joblib
+
+# Data cache
+data/_pipeline_predictions.csv
+data/_pipeline_meta.json
+data/_sources.json
+
+# Qdrant storage
+storage/
+snapshots/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
+Thumbs.db

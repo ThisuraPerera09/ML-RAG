@@ -1,0 +1,5 @@
+# RAG-specific dependencies (install in addition to requirements.txt)
+qdrant-client
+sentence-transformers
+python-dotenv
+requests
